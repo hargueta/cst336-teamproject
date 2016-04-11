@@ -1,4 +1,5 @@
 <?php
+    session_start();
     include('../../includes/database.php');
     $dbConnection = getDatabaseConnection('simple_pizza');
     
@@ -51,9 +52,12 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title> </title>
+        <title> Simple Pizza Order </title>
     </head>
     <body>
+            <h1> Welcome To Simple Pizza <?=$_SESSION['userName']?></h1>
+            <h2>What Would You Be Ordering Today ?</h2>
+            
             Filter by: 
             <input type = "radio" name = "sortBy" value = "Pizza"> Pizza
             <input type = "radio" name = "sortBy" value = "Drinks"> Drinks
@@ -71,9 +75,9 @@
                         echo "<tr>";
                     
                     echo"<td>";
-                    echo "<img src = 'img/".($count+1).".jpg' width = 100 alt = 'picture of a pizza'>";
+                    echo "<img src = 'img/".$item['name'].".jpg' width = 100 alt = 'picture of a pizza'>";
                     echo"</br>";
-                    echo "<input type ='radio' value = ".$item['name'].">".$item['name'];
+                    echo "<input type ='radio' value = ".$item['name']." name = pizza>".$item['name'];
                     echo"</td>";
                     
                     if($count == 1 && $count == 5)
@@ -103,7 +107,7 @@
                 {
                       
                     echo"<td>";
-                    echo "<img src = 'img/1".($count+1).".jpg' width = 100 alt = 'picture of a appetizers'>";
+                    echo "<img src = 'img/".$item['name'].".jpg' width = 100 alt = 'picture of a appetizers'>";
                     echo"</br>";
                     echo "<input type ='checkbox' value = ".$item['name'].">".$item['name'];
                     echo"</td>";
@@ -122,7 +126,7 @@
                 {
                       
                     echo"<td>";
-                    echo "<img src = 'img/".($count).".jpg' width = 100 alt = 'picture of a appetizers'>";
+                    echo "<img src = 'img/".$item['name'].".jpg' width = 100 alt = 'picture of a appetizers'>";
                     echo"</br>";
                     echo "<input type ='checkbox' value = ".$item['name'].">".$item['name'];
                     echo"</td>";
