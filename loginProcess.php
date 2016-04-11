@@ -3,20 +3,16 @@ session_start();
 
 include ("../includes/database.php");
 
-$connection = getDatabaseConnection('otter_express');
+$connection = getDatabaseConnection('simple_pizza');
 
 $username = $_POST['username'];
 $password = sha1($_POST['password']);  //hash("sha1", $_POST['password');
 
 $sql = "SELECT * 
-        FROM admin
-        WHERE username = '$username' 
-        AND password = '$password'"; //Not preventing SQL injection!
-
-$sql = "SELECT * 
-        FROM admin
+        FROM users
         WHERE username = :username 
-        AND password = :password";        
+        AND password = :password";
+        
 $namedParameters = array();
 $namedParameters[':username'] = $username;
 $namedParameters[':password'] = $password;
@@ -32,9 +28,9 @@ if (empty ($result)) {
 } else {
     
     $_SESSION['username'] = $username;
-    $_SESSION['adminName'] = $result['firstName'] . "  " . $result['lastName'];
+    $_SESSION['userName'] = $result['firstName'];
     
-    //header("Location: admin.php");
+    header("Location: order.php");
     
 }
 
