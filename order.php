@@ -214,34 +214,16 @@ function displayDesserts()
                     displayDesserts();
                 }
             ?>
-<<<<<<< HEAD
-
-           
         <div class = "frame">
-=======
             </br></br>
-<<<<<<< HEAD
            <input type = "submit" value = "Add to cart"> 
            </form>
-=======
            <input type = "submit" value = "Add to cart">    
             <div style = "float:left">
->>>>>>> 0cb06531c28c85735726b75f626699bea7699b4e
+
             <iframe name = "productInfoiFrame" width = "250" height = "315"
             scr = "pizzaDescription.php" frameborder = "1"></iframe>
         </div>
-<<<<<<< HEAD
-        
-        
-        
-=======
->>>>>>> 26eec385bc6566101dec1c8823da1a4387ac8405
-           
-           
-           
-           
-           
->>>>>>> 0cb06531c28c85735726b75f626699bea7699b4e
         <br/><br/><br/><br/><br/><br/><br/>
      <hr>
     <footer>
