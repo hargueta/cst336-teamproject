@@ -1,18 +1,21 @@
 <?php
 session_start();
-include ("../../includes/database.php");
+include ("../includes/database.php");
 
 $connection = getDatabaseConnection('simple_pizza');
 
 function getUserId(){
     global $connection;
     global $userId;
+    $username = $_SESSION['username'];
     
-    $sql = "SELECT userId FROM users WHERE username='".$_SESSION['username']."'";
+    $sql = "SELECT userId FROM users WHERE username='".$username."'";
     $statement = $connection->prepare($sql);
     $statement->execute();
     $userId = $statement->fetch();
     return $userId;
+    
+    print_r($userId);
 }
 
 function getPizza()
@@ -51,29 +54,56 @@ function confirmationNum()
     return $num;
 }
 
-
-function getOrder()
-{
+function getProducts(){
+    global $connection;
+    global $userId;
     
-    
-    
-    
+    $sql = "SELECT * FROM users WHERE userId='".$userId."' limit 1";
+    $statement = $connection->prepare($sql);
+    $statement->execute();
+    $record = $statement->fetchAll(PDO::FETCH_ASSOC);
+    if($record['pizzaId']!=0){
+        $sql = "SELECT name, price FROM `order` o JOIN `pizza` p on o.pizzaId=p.pizzaId WHERE userId='".$userId."' limit 1";
+        $statement = $connection->prepare($sql);
+        $statement->execute();
+        $record = $statement->fetch();
+        echo $record['name'] . " $" .$record['price'] . "<br />";
+    }
+    if($record['appetizer']!=0){
+        $sql = "SELECT name,price FROM `order` o JOIN `appetizers` p on o.pizzaId=p.appetizerId WHERE userId='".$userId."' limit 1";
+        $statement = $connection->prepare($sql);
+        $statement->execute();
+        $record = $statement->fetch();
+        echo $record['name'] . " $" .$record['price'] . "<br />";
+    }
+    if($record['drink']!=0){
+        $sql = "SELECT Name,price FROM `order` o JOIN `drinks` p on o.drirnkId=p.drinkId WHERE userId='".$userId."' limit 1";
+        $statement = $connection->prepare($sql);
+        $statement->execute();
+        $record = $statement->fetch();
+        echo $record['Name'] . " $" .$record['price'] . "<br />";
+    }
+    if($record['desserts']!=0){
+        $sql = "SELECT name,price FROM `order` o JOIN `desserts` d on o.dessertId=d.desertId WHERE userId='".$userId."' limit 1";
+        $statement = $connection->prepare($sql);
+        $statement->execute();
+        $record = $statement->fetch();
+        echo $record['name'] . " $" .$record['price'] . "<br />";
+    }
 }
-
-
 function getTotal()
 {
     global $userId;
     global $connection;
         
 
-    $sql = "SELECT total FROM `order` WHERE userId='" . $userId. "'";
+    $sql = "SELECT total FROM `order` WHERE userId='". $userId."'";
 
     $statement = $connection->prepare($sql);
     $statement->execute();
-    $records = $statement->fetchAll(PDO::FETCH_ASSOC);
+    $records = $statement->fetch();
     
-    return $records;
+    echo $records['total'];
 }
 function getTax(){
     global $userId;
@@ -85,8 +115,8 @@ function getTax(){
     $statement->execute();
     $records = $statement->fetch();
     
-    $records = $records * .10;
-    return $records;
+    $tax = $records['total'] * .10;
+    echo $tax;
 
 }
 
@@ -113,16 +143,17 @@ function getTax(){
         <h3> Here is your summary: </h3>
         
         <?php
-            $pizzaitems = $_SESSION['cart'];
-                print_r($pizzaitems);
+            //$pizzaitems = $_SESSION['cart'];
+             //   print_r($pizzaitems);
         ?>
-           
-        Quantity </t> Product </> Price
+     
         <br/>
+        <br />
+        <?=getProducts()?>
        
-        Tax(10%): <?=getTax()?>
+        Tax(10%): $<?=getTax()?>
         <br/>
-        Total: <?=getTotal()?>
+        Total: $<?=getTotal()?>
         <br/>
         
         Confirmation # <?=confirmationNum()
