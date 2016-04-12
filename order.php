@@ -245,6 +245,7 @@ function displayDesserts()
                     displayDesserts();
                 }
             ?>
+<<<<<<< HEAD
         </br></br>
             <form action="confirmation.php" >
                <input type = "submit" value = "proceed To Checkout" name = "checkout"> 
@@ -255,6 +256,18 @@ function displayDesserts()
             <iframe name = "productInfoiFrame" width = "250" height = "315"
             scr = "pizzaDescription.php" frameborder = "1"></iframe>
     
+=======
+        <div class = "frame">
+            </br></br>
+           <input type = "submit" value = "Add to cart"> 
+           </form>
+           <input type = "submit" value = "Add to cart">    
+            <div style = "float:left">
+
+            <iframe name = "productInfoiFrame" width = "250" height = "315"
+            scr = "pizzaDescription.php" frameborder = "1"></iframe>
+        </div>
+>>>>>>> 1da827be29cf4757213bfc7cd804f91b81922fc2
         <br/><br/><br/><br/><br/><br/><br/>
      <hr>
     <footer>
