@@ -1,6 +1,7 @@
 <?php
     session_start();
-    include('../../includes/database.php');
+    include('../includes/database.php');
+    
     $dbConnection = getDatabaseConnection('simple_pizza');
     
     //obtains all the information from the pizza table 
@@ -174,7 +175,7 @@ function displayDesserts()
             
             <h2> Welcome To Simple Pizza, <?=$_SESSION['userName']?> !</h2>
             <h2>What Would You Be Ordering Today ?</h2>
-            <form method = "get">
+            <form method="get">
                 
                 
                 <strong>Show: </strong>
@@ -189,6 +190,7 @@ function displayDesserts()
                 </br></br>
                 <input type ="submit"  name = "searchForm" value = "show results">
             </form>
+            <form action="confirmation.php">
             </br></br>
             <?php
                 if(isset($_GET['sortBy']) && $_GET['sortBy'] == "Pizza")
@@ -208,7 +210,8 @@ function displayDesserts()
                 }
             ?>
             </br></br>
-           <input type = "submit" value = "Add to cart">    
+           <input type = "submit" value = "Add to cart"> 
+           </form>
            
            
            
