@@ -69,9 +69,6 @@
 function displayPizza()
 {
     echo " <h1>Specialty Pizzas</h1>";
-     /*$pizzas = getPizzas();
-          echo "<table>";*/
-                
      $pizzas = getPizzas();
      
      echo "<center>";
@@ -89,9 +86,7 @@ function displayPizza()
         echo"</br>";
         echo "<input type ='radio' value = ".$item['name']." name = pizza>".$item['name'];
         echo"</br>";
-        echo"<a  target = 'productInfoiFrame' href = 'productDescription.php?name=" .$item[]
-            ]. "'>". 'Description'. "</a";
-        
+        echo"<a  target = 'productInfoiFrame' href ='pizzaDescription.php?pizzaId=".$item['pizzaId']."'>". 'Description'. "</a";
         echo"</td>";
         
         if($count == 1 && $count == 5)
@@ -117,6 +112,8 @@ function displayAppetizers()
         echo "<img src = 'img/".$item['name'].".jpg' width = 100 alt = 'picture of a appetizers'>";
         echo"</br>";
         echo "<input type ='checkbox' value = ".$item['name'].">".$item['name'];
+        echo"</br>";
+        echo"<a  target = 'productInfoiFrame' href ='appetizerDescription.php?appetizerId=".$item['appetizerId']."'>". 'Description'. "</a";
         echo"</td>";
         
         $count++;
@@ -127,7 +124,7 @@ function displayAppetizers()
 }
 function displayDrinks()
 {
-    echo "Drinks:";
+    echo "<h1>Drinks</h1>";
     $drinks = getDrinks();
     
     echo"<select>";
@@ -136,6 +133,7 @@ function displayDrinks()
             echo "<option value =".$drink['Name'].">".$drink['Name']."</option>";
         }
     echo"</select>";
+    
 }
 function displayDesserts()
 {
@@ -152,6 +150,8 @@ function displayDesserts()
         echo "<img src = 'img/".$item['name'].".jpg' width = 100 alt = 'picture of a appetizers'>";
         echo"</br>";
         echo "<input type ='checkbox' value = ".$item['name'].">".$item['name'];
+        echo"</br>";
+        echo"<a  target = 'productInfoiFrame' href ='dessertsDescription.php?dessertId=".$item['dessertId']."'>". 'Description'. "</a";
         echo"</td>";
         
         $count++;
@@ -194,7 +194,8 @@ function displayDesserts()
                 <input type ="submit"  name = "searchForm" value = "show results">
             </form>
             </br></br>
-            <?php
+            
+                 <?php
                 if(isset($_GET['sortBy']) && $_GET['sortBy'] == "Pizza")
                      displayPizza();
                  else if(isset($_GET['sortBy']) && $_GET['sortBy'] == "Drinks")
@@ -211,17 +212,15 @@ function displayDesserts()
                     displayDesserts();
                 }
             ?>
-            </br></br>
-           <input type = "submit" value = "Add to cart">    
-            <div style = "float:left">
+
+           
+        <div class = "frame">
             <iframe name = "productInfoiFrame" width = "250" height = "315"
-            scr = "getProductInfo.php" frameborder = "1"></iframe>
+            scr = "pizzaDescription.php" frameborder = "1"></iframe>
         </div>
-           
-           
-           
-           
-           
+        
+        
+        
         <br/><br/><br/><br/><br/><br/><br/>
      <hr>
     <footer>
