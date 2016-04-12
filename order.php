@@ -1,6 +1,7 @@
 <?php
     session_start();
-    include('../../includes/database.php');
+    include('../includes/database.php');
+    
     $dbConnection = getDatabaseConnection('simple_pizza');
     
     //obtains all the information from the pizza table 
@@ -178,7 +179,7 @@ function displayDesserts()
             
             <h2> Welcome To Simple Pizza, <?=$_SESSION['userName']?> !</h2>
             <h2>What Would You Be Ordering Today ?</h2>
-            <form method = "get">
+            <form method="get">
                 
                 
                 <strong>Show: </strong>
@@ -193,6 +194,7 @@ function displayDesserts()
                 </br></br>
                 <input type ="submit"  name = "searchForm" value = "show results">
             </form>
+            <form action="confirmation.php">
             </br></br>
             
                  <?php
@@ -212,15 +214,34 @@ function displayDesserts()
                     displayDesserts();
                 }
             ?>
+<<<<<<< HEAD
 
            
         <div class = "frame">
+=======
+            </br></br>
+<<<<<<< HEAD
+           <input type = "submit" value = "Add to cart"> 
+           </form>
+=======
+           <input type = "submit" value = "Add to cart">    
+            <div style = "float:left">
+>>>>>>> 0cb06531c28c85735726b75f626699bea7699b4e
             <iframe name = "productInfoiFrame" width = "250" height = "315"
             scr = "pizzaDescription.php" frameborder = "1"></iframe>
         </div>
+<<<<<<< HEAD
         
         
         
+=======
+>>>>>>> 26eec385bc6566101dec1c8823da1a4387ac8405
+           
+           
+           
+           
+           
+>>>>>>> 0cb06531c28c85735726b75f626699bea7699b4e
         <br/><br/><br/><br/><br/><br/><br/>
      <hr>
     <footer>
