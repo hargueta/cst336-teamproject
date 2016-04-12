@@ -89,6 +89,10 @@ function displayPizza()
         echo "<img src = 'img/".$item['name'].".jpg' width = 100 alt = 'picture of a pizza'>";
         echo"</br>";
         echo "<input type ='radio' value = ".$item['name']." name = pizza>".$item['name'];
+        echo"</br>";
+        echo"<a  target = 'productInfoiFrame' href = 'productDescription.php?name=" .$item[]
+            ]. "'>". 'Description'. "</a";
+        
         echo"</td>";
         
         if($count == 1 && $count == 5)
@@ -210,8 +214,16 @@ function displayDesserts()
                 }
             ?>
             </br></br>
+<<<<<<< HEAD
            <input type = "submit" value = "Add to cart"> 
            </form>
+=======
+           <input type = "submit" value = "Add to cart">    
+            <div style = "float:left">
+            <iframe name = "productInfoiFrame" width = "250" height = "315"
+            scr = "getProductInfo.php" frameborder = "1"></iframe>
+        </div>
+>>>>>>> 26eec385bc6566101dec1c8823da1a4387ac8405
            
            
            
