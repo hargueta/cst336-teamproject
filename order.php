@@ -2,7 +2,7 @@
     session_start();
     $_SESSION['cart'] = array();
     
-    include('../../includes/database.php');
+    include('includes/database.php');
     
     $dbConnection = getDatabaseConnection('simple_pizza');
     

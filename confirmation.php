@@ -1,6 +1,6 @@
 <?php
 session_start();
-include ("../../includes/database.php");
+include ("includes/database.php");
 
 $connection = getDatabaseConnection('simple_pizza');
 
