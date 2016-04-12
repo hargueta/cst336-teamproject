@@ -19,6 +19,27 @@ h1{
   height: 200px;
 }
 
+.frame  
+{
+position: relative;
+padding-bottom: 2.25%;
+padding-top: 10px;
+height: 0;
+overflow: hidden;
+font-weight: bold;
+
+}
+.frame iframe 
+{
+position: absolute;
+top: 0;
+left: 0;
+height:100%;
+width:100%;
+text-align: center;
+font-weight: bold;
+border:none;
+}
 footer{
     text-align: center;
     width: 960px;
