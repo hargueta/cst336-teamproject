@@ -1,6 +1,8 @@
 <?php
     session_start();
-    include('../includes/database.php');
+    $_SESSION['cart'] = array();
+    
+    include('../../includes/database.php');
     
     $dbConnection = getDatabaseConnection('simple_pizza');
     
@@ -67,13 +69,16 @@
         return $records;
     }
     
+    
+//displays Items 
 function displayPizza()
-{
+{  
+   
     echo " <h1>Specialty Pizzas</h1>";
-     $pizzas = getPizzas();
-     
-     echo "<center>";
-     echo "<table>";
+    echo "<form  method= 'get'>";
+    $pizzas = getPizzas();
+    echo "<center>";
+    echo "<table>";
     
     $count  =0;
      foreach($pizzas as $item)
@@ -96,11 +101,17 @@ function displayPizza()
     }
     echo"</table>";
     echo "<center>";
+    echo "<input type = 'submit' value = 'add to cart' name = 'addcart'>";
+    echo"</form>";
+    
+     if(isset($_GET['addcart']))
+        array_push($_SESSION['cart'], $_GET['pizza']);
+    
 }
 function displayAppetizers()
 {
      echo "<h1>Appetizers</h1>";
-            
+     echo"<form>";      
      $appetizer = getAppetizer();
      echo "<center>";
      echo "<table>";
@@ -112,7 +123,7 @@ function displayAppetizers()
         echo"<td>";
         echo "<img src = 'img/".$item['name'].".jpg' width = 100 alt = 'picture of a appetizers'>";
         echo"</br>";
-        echo "<input type ='checkbox' value = ".$item['name'].">".$item['name'];
+        echo "<input type ='checkbox' value = ".$item['name']." name = 'appetizer'>".$item['name'];
         echo"</br>";
         echo"<a  target = 'productInfoiFrame' href ='appetizerDescription.php?appetizerId=".$item['appetizerId']."'>". 'Description'. "</a";
         echo"</td>";
@@ -121,23 +132,36 @@ function displayAppetizers()
     }
     echo"</table>";
     echo "<center>";
+    echo "<input type = 'submit' value = 'add to cart' name = 'addcart'>";
+    echo"</form>";
+    
+     if(isset($_GET['addcart']))
+        array_push($_SESSION['cart'], $_GET['appetizer']);
+    
         
 }
 function displayDrinks()
 {
+    echo"<form>";
     echo "<h1>Drinks</h1>";
     $drinks = getDrinks();
     
     echo"<select>";
         foreach($drinks as $drink)
         {
-            echo "<option value =".$drink['Name'].">".$drink['Name']."</option>";
+            echo "<option value =".$drink['name']." name = drinks>".$drink['Name']."</option>";
         }
     echo"</select>";
+    echo"<br/><br/>";
+    echo "<input type = 'submit' value = 'add to cart' name = 'addcart'>";
+    echo"</form>";
     
+     if(isset($_GET['addcart']))
+        array_push($_SESSION['cart'], $_GET['drinks']);
 }
 function displayDesserts()
 {
+    echo"<form>";
      echo "<h1>Desserts</h1>";
      $desserts = getDesserts();
      echo "<center>";
@@ -146,11 +170,11 @@ function displayDesserts()
     $count  =16;
      foreach($desserts as $item)
     {
-          
+        
         echo"<td>";
         echo "<img src = 'img/".$item['name'].".jpg' width = 100 alt = 'picture of a appetizers'>";
         echo"</br>";
-        echo "<input type ='checkbox' value = ".$item['name'].">".$item['name'];
+        echo "<input type ='checkbox' value = ".$item['name']." name = 'desserts'>".$item['name'];
         echo"</br>";
         echo"<a  target = 'productInfoiFrame' href ='dessertsDescription.php?dessertId=".$item['dessertId']."'>". 'Description'. "</a";
         echo"</td>";
@@ -159,8 +183,14 @@ function displayDesserts()
     }
     echo"</table>";
     echo "</center>";
-}
 
+    echo "<input type = 'submit' value = 'add to cart' name = 'addcart'>";
+    echo"</form>";
+    
+     if(isset($_GET['addcart']))
+        array_push($_SESSION['cart'], $_GET['desserts']);
+}
+   
 ?>
 <!DOCTYPE html>
 <html>
@@ -194,7 +224,8 @@ function displayDesserts()
                 </br></br>
                 <input type ="submit"  name = "searchForm" value = "show results">
             </form>
-            <form action="confirmation.php">
+            
+            
             </br></br>
             
                  <?php
@@ -214,38 +245,19 @@ function displayDesserts()
                     displayDesserts();
                 }
             ?>
-<<<<<<< HEAD
-
-           
-        <div class = "frame">
-=======
-            </br></br>
-<<<<<<< HEAD
-           <input type = "submit" value = "Add to cart"> 
+        </br></br>
+            <form action="confirmation.php" >
+               <input type = "submit" value = "proceed To Checkout" name = "checkout"> 
            </form>
-=======
-           <input type = "submit" value = "Add to cart">    
-            <div style = "float:left">
->>>>>>> 0cb06531c28c85735726b75f626699bea7699b4e
+           
+            </br></br>
+
             <iframe name = "productInfoiFrame" width = "250" height = "315"
             scr = "pizzaDescription.php" frameborder = "1"></iframe>
-        </div>
-<<<<<<< HEAD
-        
-        
-        
-=======
->>>>>>> 26eec385bc6566101dec1c8823da1a4387ac8405
-           
-           
-           
-           
-           
->>>>>>> 0cb06531c28c85735726b75f626699bea7699b4e
+    
         <br/><br/><br/><br/><br/><br/><br/>
      <hr>
     <footer>
-        
         &copy; Simple Pizza, 2016. <br/>
         Disclaimer: Prices and availabilty are subject to change.
         <br />

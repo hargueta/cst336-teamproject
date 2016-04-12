@@ -1,6 +1,6 @@
 <?php
 session_start();
-include ("../includes/database.php");
+include ("../../includes/database.php");
 
 $connection = getDatabaseConnection('simple_pizza');
 
@@ -66,7 +66,7 @@ function getTotal()
     global $userId;
     global $connection;
         
-    $sql = "SELECT price FROM order WHERE userId='" . $userId. "'";
+    $sql = "SELECT total FROM `order` WHERE userId='" . $userId. "'";
     $statement = $connection->prepare($sql);
     $statement->execute();
     $records = $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -77,7 +77,7 @@ function getTax(){
     global $userId;
     global $connection;
         
-    $sql = "SELECT price FROM order WHERE userId='" . $userId. "'";
+    $sql = "SELECT total FROM `order` WHERE userId='" . $userId. "'";
     $statement = $connection->prepare($sql);
     $statement->execute();
     $records = $statement->fetch();
@@ -87,15 +87,7 @@ function getTax(){
 
 }
 
-
-
-
-
-
 ?>
-
-
-
 
 <!DOCTYPE html>
 <html>
@@ -117,21 +109,21 @@ function getTax(){
         <h2> Thank you! </h2>
         <h3> Here is your summary: </h3>
         
-        
+        <?php
+            $pizzaitems = $_SESSION['cart'];
+                print_r($pizzaitems);
+        ?>
+           
         Quantity </t> Product </> Price
         <br/>
-        
-        
-        
-        
-        
-        
+       
         Tax(10%): <?=getTax()?>
         <br/>
         Total: <?=getTotal()?>
         <br/>
         
-        Confirmation # <?=confirmationNum()?>
+        Confirmation # <?=confirmationNum()
+        ?>
 
     
     <br/><br/><br/><br/><br/><br/><br/>
