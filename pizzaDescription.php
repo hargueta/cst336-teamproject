@@ -1,6 +1,6 @@
 <?php
 
-include('../../includes/database.php');
+include('includes/database.php');
 
 function getProductInfo()
 {
