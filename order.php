@@ -69,10 +69,12 @@
 function displayPizza()
 {
     echo " <h1>Specialty Pizzas</h1>";
-     $pizzas = getPizzas();
-          echo "<table>";
+     /*$pizzas = getPizzas();
+          echo "<table>";*/
                 
      $pizzas = getPizzas();
+     
+     echo "<center>";
      echo "<table>";
     
     $count  =0;
@@ -97,12 +99,14 @@ function displayPizza()
         $count++;
     }
     echo"</table>";
+    echo "<center>";
 }
 function displayAppetizers()
 {
      echo "<h1>Appetizers</h1>";
             
      $appetizer = getAppetizer();
+     echo "<center>";
      echo "<table>";
     
     $count  =0;
@@ -118,12 +122,14 @@ function displayAppetizers()
         $count++;
     }
     echo"</table>";
+    echo "<center>";
         
 }
 function displayDrinks()
 {
     echo "Drinks:";
     $drinks = getDrinks();
+    
     echo"<select>";
         foreach($drinks as $drink)
         {
@@ -135,6 +141,7 @@ function displayDesserts()
 {
      echo "<h1>Desserts</h1>";
      $desserts = getDesserts();
+     echo "<center>";
      echo "<table>";
     
     $count  =16;
@@ -150,25 +157,37 @@ function displayDesserts()
         $count++;
     }
     echo"</table>";
+    echo "</center>";
 }
 
 ?>
 <!DOCTYPE html>
 <html>
     <head>
-        <title> Simple Pizza Order </title>
+       <title>Simple Pizza Order</title>
+       
+       <link href="login.css" rel="stylesheet" /> 
     </head>
     <body>
-            <h1> Welcome To Simple Pizza <?=$_SESSION['userName']?></h1>
+            
+            <div class="bg">
+        <h1> Simple Pizza </h1>
+          </div>      
+            
+            
+            
+            <h2> Welcome To Simple Pizza, <?=$_SESSION['userName']?> !</h2>
             <h2>What Would You Be Ordering Today ?</h2>
             <form method = "get">
-                Show: 
+                
+                
+                <strong>Show: </strong>
                 <input type = "radio" name = "sortBy" value = "Pizza"> Pizza
                 <input type = "radio" name = "sortBy" value = "Drinks"> Drinks
                 <input type = "radio" name = "sortBy" value = "Appetizer"> Appetizers
                 <input type = "radio" name = "sortBy" value = "Desserts"> desserts
                 </br></br>
-                Order Results By: 
+                <strong>Order Results By: </strong> 
                 <input type = "radio" name = "orderBy" value = "calories"> Calories
                 <input type = "radio" name = "orderBy" value = "name"> Name
                 </br></br>
@@ -198,6 +217,27 @@ function displayDesserts()
             <iframe name = "productInfoiFrame" width = "250" height = "315"
             scr = "getProductInfo.php" frameborder = "1"></iframe>
         </div>
+           
+           
+           
+           
+           
+        <br/><br/><br/><br/><br/><br/><br/>
+     <hr>
+    <footer>
+        
+        &copy; Simple Pizza, 2016. <br/>
+        Disclaimer: Prices and availabilty are subject to change.
+        <br />
+        
+
+    <br />
+    <img src="img/slice.png" height="52" width="52" alt= "pizza logo"/>
+    </footer>
+       
+           
+           
+           
            
     </body>
 </html>
