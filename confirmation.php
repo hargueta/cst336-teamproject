@@ -8,7 +8,7 @@ function getUserId(){
     global $connection;
     global $userId;
     
-    $sql = "SELECT usernameId FROM users WHERE username='".$_SESSION['username']."'";
+    $sql = "SELECT userId FROM users WHERE username='".$_SESSION['username']."'";
     $statement = $connection->prepare($sql);
     $statement->execute();
     $userId = $statement->fetch();
@@ -66,7 +66,9 @@ function getTotal()
     global $userId;
     global $connection;
         
+
     $sql = "SELECT total FROM `order` WHERE userId='" . $userId. "'";
+
     $statement = $connection->prepare($sql);
     $statement->execute();
     $records = $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -78,6 +80,7 @@ function getTax(){
     global $connection;
         
     $sql = "SELECT total FROM `order` WHERE userId='" . $userId. "'";
+
     $statement = $connection->prepare($sql);
     $statement->execute();
     $records = $statement->fetch();
