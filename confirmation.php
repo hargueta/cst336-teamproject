@@ -1,4 +1,19 @@
 <?php
+session_start();
+include ("../includes/database.php");
+
+$connection = getDatabaseConnection('simple_pizza');
+
+function getUserId(){
+    global $connection;
+    global $userId;
+    
+    $sql = "SELECT usernameId FROM users WHERE username='".$_SESSION['username']."'";
+    $statement = $connection->prepare($sql);
+    $statement->execute();
+    $userId = $statement->fetch();
+    return $userId;
+}
 
 function getPizza()
 {
@@ -48,7 +63,28 @@ function getOrder()
 
 function getTotal()
 {
+    global $userId;
+    global $connection;
+        
+    $sql = "SELECT price FROM order WHERE userId='" . $userId. "'";
+    $statement = $connection->prepare($sql);
+    $statement->execute();
+    $records = $statement->fetchAll(PDO::FETCH_ASSOC);
     
+    return $records;
+}
+function getTax(){
+    global $userId;
+    global $connection;
+        
+    $sql = "SELECT price FROM order WHERE userId='" . $userId. "'";
+    $statement = $connection->prepare($sql);
+    $statement->execute();
+    $records = $statement->fetch();
+    
+    $records = $records * .10;
+    return $records;
+
 }
 
 
@@ -90,9 +126,9 @@ function getTotal()
         
         
         
-        Tax(10%):
+        Tax(10%): <?=getTax()?>
         <br/>
-        Total: 
+        Total: <?=getTotal()?>
         <br/>
         
         Confirmation # <?=confirmationNum()?>
